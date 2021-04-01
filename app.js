@@ -134,10 +134,6 @@ app.get('/requestFiles', (req, res) => {
     }
 });
 
-app.get('/requestFiles', (req, res) => {
-    res.send("dale");
-});
-
 app.listen(port, () => {
     console.log(`Listening at: https://localhost:${port}`);
 });
