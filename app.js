@@ -1,8 +1,6 @@
 const express = require("express");
 const readline = require('readline');
-const {
-    google
-} = require('googleapis');
+const {google} = require('googleapis');
 const fs = require('fs');
 const app = express();
 const port = 8000;
