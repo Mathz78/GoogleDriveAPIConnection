@@ -20,9 +20,11 @@ const SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
 const TOKEN_PATH = 'token.json';
 
 app.get('/', (req, res) => {
-    res.render('index', {
-        foo: 'FOO'
-    });
+    if (fs.existsSync('token.json')) {
+        return res.redirect('/home');
+    } else {
+        return res.render('index');
+    }
 });
 
 app.get('/auth', (req, res) => {
@@ -49,7 +51,7 @@ app.get('/auth', (req, res) => {
             if (err) return getAccessToken(oAuth2Client);
             if (token) {
                 oAuth2Client.setCredentials(JSON.parse(token));
-                res.redirect('/home');
+                return res.redirect('/home');
             }
         });
     }
@@ -98,7 +100,7 @@ app.get('/callback', (req, res) => {
             if (err) return getAccessToken(oAuth2Client);
             if (token) {
                 oAuth2Client.setCredentials(JSON.parse(token));
-                res.send('successful');
+                return res.redirect('/home');
             }
         });
     }
@@ -120,21 +122,23 @@ app.get('/callback', (req, res) => {
             fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
                 if (err) return console.error(err);
                 console.log('Token stored to: ', TOKEN_PATH);
-                return res.redirect('/auth');
+                return res.redirect('/home');
             });
         });
     }
 });
 
 app.get('/home', (req, res) => {
-    if (fs.existsSync('token.js')) {
-        res.redirect('/home');
+    if (fs.existsSync('token.json')) {
+        return res.render('home');
     } else {
         res.redirect('/');
     }
 });
 
 app.get('/requestFiles', (req, res) => {
+    if (!fs.existsSync('token.json')) {return res.redirect('/');}
+
     fs.readFile('credentials.json', (err, content) => {
         if (err) return console.log('Error loading client secret file:', err);
         // Authorize a client with credentials, then call the Google Drive API.
@@ -169,10 +173,8 @@ app.get('/requestFiles', (req, res) => {
         }, (err, res) => {
             if (err) return console.log('The API returned an error: ' + err);
             files = res.data.files;
-            var test = res.data;
 
             console.log("Qnt of Files: ", files.length);
-            console.log("Qnt of data: ", test.length);
             returnView(files);
         });
     }
