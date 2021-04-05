@@ -1,7 +1,7 @@
 const express = require("express");
 const readline = require('readline');
 const {google} = require('googleapis');
-var request = require('request');
+const request = require('request');
 const url = require('url');
 const fs = require('fs');
 const app = express();
@@ -49,7 +49,7 @@ app.get('/auth', (req, res) => {
             if (err) return getAccessToken(oAuth2Client);
             if (token) {
                 oAuth2Client.setCredentials(JSON.parse(token));
-                res.send('successful');
+                res.render('home');
             }
         });
     }
@@ -69,61 +69,67 @@ app.get('/auth', (req, res) => {
         console.log("");
         console.log("Redirecting to Google...");
         res.redirect(authUrl);
+    }
+});
 
+app.get('/callback', (req, res) => {
 
-        const rl = readline.createInterface({
-            input: process.stdin,
-            output: process.stdout,
+    // Duplicated code
+    // Load client secrets from a local file.
+    fs.readFile('credentials.json', (err, content) => {
+        if (err) return console.log('Error loading client secret file:', err);
+        // Authorize a client with credentials, then call the Google Drive API.
+        authorize(JSON.parse(content));
+    });
+
+    /**
+     * Create an OAuth2 client with the given credentials, and then execute the
+     * given callback function.
+     * @param {Object} credentials The authorization client credentials.
+     * @param {function} callback The callback to call with the authorized client.
+     */
+    function authorize(credentials, callback) {
+        const {client_secret, client_id, redirect_uris} = credentials.web;
+        const oAuth2Client = new google.auth.OAuth2(
+            client_id, client_secret, redirect_uris[0]);
+
+        // Check if we have previously stored a token.
+        fs.readFile(TOKEN_PATH, (err, token) => {
+            if (err) return getAccessToken(oAuth2Client);
+            if (token) {
+                oAuth2Client.setCredentials(JSON.parse(token));
+                res.send('successful');
+            }
         });
+    }
 
-        // console.log(url.parse(req.url).pathname);
+    /**
+     * Get and store new token after prompting for user authorization, and then
+     * execute the given callback with the authorized OAuth2 client.
+     * @param {google.auth.OAuth2} oAuth2Client The OAuth2 client to get token for.
+     * @param {getEventsCallback} callback The callback for the authorized client.
+     */
+    // Yep..
 
-        // Getting the Google's CODE from the URL
-        // var googleUrl = window.location.search;
-        // var urlParams = new URLSearchParams(googleUrl);
-        // var googleCode = urlParams.get('code');
-        //
-        // console.log(googleCode);
-
-        // Using URL
-        // function getFormattedUrl(req) {
-        //     return url.format({
-        //         protocol: req.protocol,
-        //         host: req.get('host'),
-        //         pathname: req.originalUrl
-        //     });
-        // }
-        //
-
-
-        var interval = setInterval(function(){
-            // var url = getFormattedUrl(req);
-            // console.log(url);
-
-            // var r = request(authUrl, function (e, response) {
-            //     // console.log(r.uri);
-            //     console.log(response.request.uri);
-            // })
-
-            console.log(res);
-        }, 5000);
-
-        rl.question('Enter the code from that page here: ', (code) => {
-            rl.close();
-            console.log(req.get());
-            oAuth2Client.getToken(code, (err, token) => {
-                if (err) return console.error('Error retrieving access token', err);
-                oAuth2Client.setCredentials(token);
-                // Store the token to disk for later program executions
-                fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
-                    if (err) return console.error(err);
-                    console.log('Token stored to', TOKEN_PATH);
-                });
-                callback(oAuth2Client);
+    function getAccessToken(oAuth2Client, callback) {
+        var code = req.query.code;
+        oAuth2Client.getToken(code, (err, token) => {
+            if (err) return res.send("It's not working.");
+            oAuth2Client.setCredentials(token);
+            // Store the token to disk for later program executions
+            fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
+                if (err) return console.error(err);
+                console.log('Token stored to: ', TOKEN_PATH);
+                return res.redirect('/auth');
             });
         });
     }
 });
+
+app.get('/home', (req, res) => {
+
+    res.render('home');
+}) ;
 
 app.get('/requestFiles', (req, res) => {
     fs.readFile('credentials.json', (err, content) => {
