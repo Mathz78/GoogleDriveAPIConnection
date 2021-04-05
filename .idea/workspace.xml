@@ -20,7 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce087909-e82b-4830-a520-a502e239545d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/views/home.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
     </list>
@@ -63,7 +62,7 @@
       <workItem from="1617392771924" duration="3213000" />
       <workItem from="1617461432496" duration="3133000" />
       <workItem from="1617568349150" duration="5774000" />
-      <workItem from="1617625655982" duration="192000" />
+      <workItem from="1617625655982" duration="3571000" />
     </task>
     <servers />
   </component>
@@ -83,10 +82,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1617625037731">
+    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1617628698886">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1617625037731" />
+    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1617628698886" />
     <state width="1323" height="172" key="GridCell.Tab.0.bottom" timestamp="1617625512426">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

@@ -49,7 +49,7 @@ app.get('/auth', (req, res) => {
             if (err) return getAccessToken(oAuth2Client);
             if (token) {
                 oAuth2Client.setCredentials(JSON.parse(token));
-                res.render('home');
+                res.redirect('/home');
             }
         });
     }
@@ -127,9 +127,12 @@ app.get('/callback', (req, res) => {
 });
 
 app.get('/home', (req, res) => {
-
-    res.render('home');
-}) ;
+    if (fs.existsSync('token.js')) {
+        res.redirect('/home');
+    } else {
+        res.redirect('/');
+    }
+});
 
 app.get('/requestFiles', (req, res) => {
     fs.readFile('credentials.json', (err, content) => {
