@@ -1,6 +1,8 @@
 const express = require("express");
 const readline = require('readline');
 const {google} = require('googleapis');
+var request = require('request');
+const url = require('url');
 const fs = require('fs');
 const app = express();
 const port = 8000;
@@ -63,13 +65,52 @@ app.get('/auth', (req, res) => {
             access_type: 'offline',
             scope: SCOPES,
         });
-        console.log('Authorize this app by visiting this url:', authUrl);
+
+        console.log("");
+        console.log("Redirecting to Google...");
+        res.redirect(authUrl);
+
+
         const rl = readline.createInterface({
             input: process.stdin,
             output: process.stdout,
         });
+
+        // console.log(url.parse(req.url).pathname);
+
+        // Getting the Google's CODE from the URL
+        // var googleUrl = window.location.search;
+        // var urlParams = new URLSearchParams(googleUrl);
+        // var googleCode = urlParams.get('code');
+        //
+        // console.log(googleCode);
+
+        // Using URL
+        // function getFormattedUrl(req) {
+        //     return url.format({
+        //         protocol: req.protocol,
+        //         host: req.get('host'),
+        //         pathname: req.originalUrl
+        //     });
+        // }
+        //
+
+
+        var interval = setInterval(function(){
+            // var url = getFormattedUrl(req);
+            // console.log(url);
+
+            // var r = request(authUrl, function (e, response) {
+            //     // console.log(r.uri);
+            //     console.log(response.request.uri);
+            // })
+
+            console.log(res);
+        }, 5000);
+
         rl.question('Enter the code from that page here: ', (code) => {
             rl.close();
+            console.log(req.get());
             oAuth2Client.getToken(code, (err, token) => {
                 if (err) return console.error('Error retrieving access token', err);
                 oAuth2Client.setCredentials(token);
