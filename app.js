@@ -41,22 +41,30 @@ async function authorize() {
     return new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
 }
 
+async function existsToken() {
+    let promise = new Promise((resolve, reject) => {
+        // Check if we have previously stored a token.
+        fs.readFile(TOKEN_PATH, (err, token) => {
+            if (err) return resolve(false);
+            if (token) return resolve(JSON.parse(token));
+        });
+    });
+    return await promise;
+}
 
 app.get('/auth', (req, res) => {
     (async () => {
         const oAuth2Client = await authorize();
+        const token = await existsToken();
 
-        // all of the script....
-        // Check if we have previously stored a token.
-        fs.readFile(TOKEN_PATH, (err, token) => {
-            if (err) return getAccessToken(oAuth2Client);
-            if (token) {
-                oAuth2Client.setCredentials(JSON.parse(token));
-                return res.redirect('/home');
-            }
-        });
+        if (token) {
+            oAuth2Client.setCredentials(token);
+            return res.redirect('/home');
+        } else {
+            getAccessToken(oAuth2Client);
+        }
 
-        function getAccessToken(oAuth2Client, callback) {
+        function getAccessToken(oAuth2Client) {
             const authUrl = oAuth2Client.generateAuthUrl({
                 access_type: 'offline',
                 scope: SCOPES,
@@ -70,57 +78,32 @@ app.get('/auth', (req, res) => {
 });
 
 app.get('/callback', (req, res) => {
+    (async () => {
+        const oAuth2Client = await authorize();
+        const token = await existsToken();
 
-    // Duplicated code
-    // Load client secrets from a local file.
-    fs.readFile('credentials.json', (err, content) => {
-        if (err) return console.log('Error loading client secret file:', err);
-        // Authorize a client with credentials, then call the Google Drive API.
-        authorize(JSON.parse(content));
-    });
-
-    /**
-     * Create an OAuth2 client with the given credentials, and then execute the
-     * given callback function.
-     * @param {Object} credentials The authorization client credentials.
-     * @param {function} callback The callback to call with the authorized client.
-     */
-    function authorize(credentials, callback) {
-        const {client_secret, client_id, redirect_uris} = credentials.web;
-        const oAuth2Client = new google.auth.OAuth2(
-            client_id, client_secret, redirect_uris[0]);
-
-        // Check if we have previously stored a token.
-        fs.readFile(TOKEN_PATH, (err, token) => {
-            if (err) return getAccessToken(oAuth2Client);
-            if (token) {
-                oAuth2Client.setCredentials(JSON.parse(token));
-                return res.redirect('/home');
-            }
-        });
-    }
-
-    /**
-     * Get and store new token after prompting for user authorization, and then
-     * execute the given callback with the authorized OAuth2 client.
-     * @param {google.auth.OAuth2} oAuth2Client The OAuth2 client to get token for.
-     * @param {getEventsCallback} callback The callback for the authorized client.
-     */
-    // Yep..
-
-    function getAccessToken(oAuth2Client, callback) {
-        var code = req.query.code;
-        oAuth2Client.getToken(code, (err, token) => {
-            if (err) return res.send("It's not working.");
+        if (token) {
             oAuth2Client.setCredentials(token);
-            // Store the token to disk for later program executions
-            fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
-                if (err) return console.error(err);
-                console.log('Token stored to: ', TOKEN_PATH);
-                return res.redirect('/home');
+            return res.redirect('/home');
+        } else {
+            getAccessToken(oAuth2Client);
+        }
+
+        function getAccessToken(oAuth2Client, callback) {
+            var code = req.query.code;
+            console.log("The code is: ", code);
+            oAuth2Client.getToken(code, (err, token) => {
+                if (err) return res.send("It's not working.");
+                oAuth2Client.setCredentials(token);
+                // Store the token to disk for later program executions
+                fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
+                    if (err) return console.error(err);
+                    console.log('Token stored to: ', TOKEN_PATH);
+                    return res.redirect('/home');
+                });
             });
-        });
-    }
+        }
+    })();
 });
 
 app.get('/home', (req, res) => {
