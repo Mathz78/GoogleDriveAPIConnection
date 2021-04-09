@@ -115,51 +115,42 @@ app.get('/home', (req, res) => {
 });
 
 app.get('/requestFiles', (req, res) => {
-    if (!fs.existsSync('token.json')) {return res.redirect('/');}
+    (async () => {
+        const oAuth2Client = await authorize();
+        const token = await existsToken();
 
-    fs.readFile('credentials.json', (err, content) => {
-        if (err) return console.log('Error loading client secret file:', err);
-        // Authorize a client with credentials, then call the Google Drive API.
-        authorize(JSON.parse(content), listFiles);
-    });
+        if (token) {
+            oAuth2Client.setCredentials(token);
+            listFiles(oAuth2Client);
+        } else {
+            res.redirect('/')
+        }
 
-    function authorize(credentials, callback) {
-        const {client_secret, client_id, redirect_uris} = credentials.web;
-        const oAuth2Client = new google.auth.OAuth2(
-            client_id, client_secret, redirect_uris[0]);
 
-        // Check if we have previously stored a token.
-        fs.readFile(TOKEN_PATH, (err, token) => {
-            if (err) return getAccessToken(oAuth2Client, callback);
-            oAuth2Client.setCredentials(JSON.parse(token));
-            callback(oAuth2Client);
-        });
-    }
+        /**
+         * Lists the names and IDs of up to 1000 files.
+         * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
+         */
+        var files;
 
-    /**
-     * Lists the names and IDs of up to 10 files.
-     * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
-     */
+        function listFiles(auth) {
+            const drive = google.drive({version: 'v3', auth});
+            drive.files.list({
+                pageSize: 1000,
+                fields: 'nextPageToken, files(id, name)',
+            }, (err, res) => {
+                if (err) return console.log('The API returned an error: ' + err);
+                files = res.data.files;
 
-    var files;
+                console.log("Qnt of Files: ", files.length);
+                returnView(files);
+            });
+        }
 
-    function listFiles(auth) {
-        const drive = google.drive({version: 'v3', auth});
-        drive.files.list({
-            pageSize: 1000,
-            fields: 'nextPageToken, files(id, name)',
-        }, (err, res) => {
-            if (err) return console.log('The API returned an error: ' + err);
-            files = res.data.files;
-
-            console.log("Qnt of Files: ", files.length);
-            returnView(files);
-        });
-    }
-
-    function returnView(files) {
-        res.render('result', {files: files});
-    }
+        function returnView(files) {
+            res.render('result', {files: files});
+        }
+    })();
 });
 
 app.listen(port, () => {
