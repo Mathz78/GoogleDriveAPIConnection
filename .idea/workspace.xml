@@ -20,9 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce087909-e82b-4830-a520-a502e239545d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/routes/auth.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/callback.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/home.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/requestFiles.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/root.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testes.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +35,13 @@
   </component>
   <component name="ComposerSettings">
     <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -84,10 +95,14 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1617971711072">
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1618321834243">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1617971711072" />
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1618321834243" />
+    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1618324769588">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1618324769588" />
     <state width="1323" height="172" key="GridCell.Tab.0.bottom" timestamp="1617625512426">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
