@@ -10,6 +10,7 @@ router
             const oAuth2Client = await imports.authorize;
             const token = await imports.existsToken;
 
+            console.log(token);
             if (token) {
                 oAuth2Client.setCredentials(token);
                 listFiles(oAuth2Client);
