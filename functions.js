@@ -14,8 +14,6 @@ async function authorize() {
     })
     let credentials = await promise;
 
-    console.log("Entrou no authorize()");
-
     const {client_secret, client_id, redirect_uris} = credentials.web;
     return new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
 }
@@ -29,7 +27,6 @@ async function existsToken() {
         });
     });
 
-    console.log("Entrou no existsToken()");
     return await promise;
 }
 
