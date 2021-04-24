@@ -1,5 +1,5 @@
 const express = require("express");
-const imports = require("../app");
+const imports = require("../functions");
 const fs = require('fs');
 const {google} = require("googleapis");
 const router = express.Router();
@@ -7,15 +7,26 @@ const router = express.Router();
 router
     .route("/")
     .get((req, res) => {
-        res.render('uploadFiles');
-    })
-    .post((req, res) => {
         (async () => {
-            const oAuth2Client = await imports.authorize;
-            const token = await imports.existsToken;
+            const oAuth2Client = await imports.authorize();
+            const token = await imports.existsToken();
 
             if (token) {
                 oAuth2Client.setCredentials(token);
+                res.render('uploadFiles');
+            } else {
+                res.redirect('/')
+            }
+        })();
+    })
+    .post((req, res) => {
+        (async () => {
+            const oAuth2Client = await imports.authorize();
+            const token = await imports.existsToken();
+
+            if (token) {
+                oAuth2Client.setCredentials(token);
+                res.render('uploadFiles');
             } else {
                 res.redirect('/')
             }
@@ -41,11 +52,7 @@ router
                     fields: 'id'
                 }, function (err, file) {
                     if (err) {
-                        const message = "You couldn't upload your file. Try again later.";
-                        res.render('error', {
-                            message: message,
-                            errorMessage: err
-                        });
+                        console.log(err);
                     } else {
                         console.log("Photo sent successfully");
                         console.log("File ID: " + file.data.id);

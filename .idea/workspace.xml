@@ -20,15 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce087909-e82b-4830-a520-a502e239545d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/routes/uploadFiles.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/uploadFiles.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/functions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/callback.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/callback.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/home.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/requestFiles.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/requestFiles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/home.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/home.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/root.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/root.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/uploadFiles.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/uploadFiles.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +61,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="discord-application" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -70,10 +70,18 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Node.js.auth.js">
     <configuration name="NodeJS Debugger" type="NodeJSConfigurationType" path-to-js-file="app.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
+    <configuration name="auth.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/routes/auth.js" working-dir="$PROJECT_DIR$/routes">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.auth.js" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -94,6 +102,7 @@
       <workItem from="1618632651021" duration="279000" />
       <workItem from="1618694806747" duration="7852000" />
       <workItem from="1618756396744" duration="4453000" />
+      <workItem from="1619292232062" duration="29000" />
     </task>
     <servers />
   </component>
@@ -112,62 +121,8 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="1828" y="195" width="1084" height="708" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1618757811723">
-      <screen x="1366" y="0" width="1920" height="1080" />
-    </state>
-    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1618321834243" />
-    <state x="1828" y="195" width="1084" height="708" key="#com.intellij.execution.impl.EditConfigurationsDialog/1366.0.1920.1080/0.155.1366.768@1366.0.1920.1080" timestamp="1618757811723" />
-    <state x="2012" y="345" width="678" height="414" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1618758175797">
-      <screen x="1366" y="0" width="1920" height="1080" />
-    </state>
-    <state x="2012" y="345" width="678" height="414" key="#com.intellij.fileTypes.FileTypeChooser/1366.0.1920.1080/0.155.1366.768@1366.0.1920.1080" timestamp="1618758175797" />
-    <state x="1946" y="165" width="524" height="500" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1618759640407">
-      <screen x="1366" y="0" width="1920" height="1080" />
-    </state>
-    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1618324769588" />
-    <state x="1946" y="165" width="524" height="500" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1366.0.1920.1080/0.120.1366.768@1366.0.1920.1080" timestamp="1618695240958" />
-    <state x="1946" y="165" width="524" height="500" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1366.0.1920.1080/0.155.1366.768@1366.0.1920.1080" timestamp="1618759640407" />
-    <state x="2139" y="311" width="424" height="482" key="FileChooserDialogImpl" timestamp="1618632230438">
-      <screen x="1366" y="0" width="1920" height="1080" />
-    </state>
-    <state x="2139" y="311" width="424" height="482" key="FileChooserDialogImpl/1366.0.1920.1080/0.120.1366.768@1366.0.1920.1080" timestamp="1618632230438" />
-    <state width="1814" height="269" key="GridCell.Tab.0.bottom" timestamp="1618757996701">
-      <screen x="1366" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1323" height="172" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1617625512426" />
-    <state width="1814" height="269" key="GridCell.Tab.0.bottom/1366.0.1920.1080/0.155.1366.768@1366.0.1920.1080" timestamp="1618757996701" />
-    <state width="1814" height="269" key="GridCell.Tab.0.center" timestamp="1618757996700">
-      <screen x="1366" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1323" height="172" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1617625512426" />
-    <state width="1814" height="269" key="GridCell.Tab.0.center/1366.0.1920.1080/0.155.1366.768@1366.0.1920.1080" timestamp="1618757996700" />
-    <state width="1814" height="269" key="GridCell.Tab.0.left" timestamp="1618757996699">
-      <screen x="1366" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1323" height="172" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1617625512426" />
-    <state width="1814" height="269" key="GridCell.Tab.0.left/1366.0.1920.1080/0.155.1366.768@1366.0.1920.1080" timestamp="1618757996699" />
-    <state width="1814" height="269" key="GridCell.Tab.0.right" timestamp="1618757996700">
-      <screen x="1366" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1323" height="172" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1617625512426" />
-    <state width="1814" height="269" key="GridCell.Tab.0.right/1366.0.1920.1080/0.155.1366.768@1366.0.1920.1080" timestamp="1618757996700" />
-    <state x="1845" y="188" key="SettingsEditor" timestamp="1618757635563">
-      <screen x="1366" y="0" width="1920" height="1080" />
-    </state>
-    <state x="1845" y="188" key="SettingsEditor/1366.0.1920.1080/0.155.1366.768@1366.0.1920.1080" timestamp="1618757635563" />
-    <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1617622150380">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1617622150380" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1617630315126">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1617630315126" />
-    <state x="1852" y="73" width="945" height="1006" key="search.everywhere.popup" timestamp="1618527944512">
-      <screen x="1366" y="0" width="1920" height="1080" />
-    </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1617293709455" />
-    <state x="1852" y="73" width="945" height="1006" key="search.everywhere.popup/1366.0.1920.1080/0.120.1366.768@1366.0.1920.1080" timestamp="1618527944512" />
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

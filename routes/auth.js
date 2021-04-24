@@ -1,13 +1,13 @@
 const express = require("express");
-const imports = require("../app");
+const imports = require("../functions");
 const router = express.Router();
 
 router
     .route("/")
     .get((req, res) => {
         (async () => {
-            const oAuth2Client = await imports.authorize;
-            const token = await imports.existsToken;
+            const oAuth2Client = await imports.authorize();
+            const token = await imports.existsToken();
 
             if (token) {
                 oAuth2Client.setCredentials(token);
