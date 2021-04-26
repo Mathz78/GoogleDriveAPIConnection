@@ -8,11 +8,9 @@ router
     .route("/")
     .get((req, res) => {
         (async () => {
-            const oAuth2Client = await imports.authorize();
             const token = await imports.existsToken();
 
             if (token) {
-                oAuth2Client.setCredentials(token);
                 res.render('uploadFiles');
             } else {
                 res.redirect('/')
@@ -23,13 +21,7 @@ router
         (async () => {
             const oAuth2Client = await imports.authorize();
             const token = await imports.existsToken();
-
-            if (token) {
-                oAuth2Client.setCredentials(token);
-                res.render('uploadFiles');
-            } else {
-                res.redirect('/')
-            }
+            oAuth2Client.setCredentials(token);
 
             const file = req.files.file;
             const fileName = file.name;
@@ -51,16 +43,13 @@ router
                     media: media,
                     fields: 'id'
                 }, function (err, file) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log("Photo sent successfully");
-                        console.log("File ID: " + file.data.id);
-                        res.redirect('/home');
-                    }
+                    if (err) return console.log(err);
+                    
+                    console.log("File sent successfully");
+                    console.log("File ID: " + file.data.id);
+                    res.redirect('/home');
                 })
             }
-
             uploadFile(oAuth2Client);
         })();
     });

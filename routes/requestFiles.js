@@ -10,7 +10,6 @@ router
             const oAuth2Client = await imports.authorize();
             const token = await imports.existsToken();
 
-            console.log(token);
             if (token) {
                 oAuth2Client.setCredentials(token);
                 listFiles(oAuth2Client);
@@ -31,9 +30,8 @@ router
                     fields: 'nextPageToken, files(id, name)',
                 }, (err, res) => {
                     if (err) return console.log('The API returned an error: ' + err);
+                    
                     files = res.data.files;
-
-                    console.log("Qnt of Files: ", files.length);
                     returnView(files);
                 });
             }
