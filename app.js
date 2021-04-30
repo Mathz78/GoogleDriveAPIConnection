@@ -6,6 +6,7 @@ const port = 8000;
 // Setting EJS to be the engine and its folder
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/views'));
+app.use(express.static(__dirname + '/public'));
 app.use(fileUpload({
     useTempFiles : true,
     tempFileDir : __dirname + '/temp'
