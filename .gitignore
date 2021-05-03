@@ -1,5 +1,5 @@
 /node_modules
-.idea/
+/.idea
 temp/
 credentials.json
 token.json
