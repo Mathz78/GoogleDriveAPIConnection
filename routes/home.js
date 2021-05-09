@@ -5,11 +5,15 @@ const router = express.Router();
 router
     .route("/")
     .get((req, res) => {
-        if (imports.fs.existsSync('token.json')) {
-            return res.render('home');
-        } else {
-            res.redirect('/');
-        }
+        (async () => {
+            const token = await imports.existsToken(req);
+
+            if (token) {
+                return res.render('home');
+            } else {
+                res.redirect('/');
+            }
+        })();
     });
 
 module.exports = router;

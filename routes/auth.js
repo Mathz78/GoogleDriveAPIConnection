@@ -7,7 +7,7 @@ router
     .get((req, res) => {
         (async () => {
             const oAuth2Client = await imports.authorize();
-            const token = await imports.existsToken();
+            const token = await imports.existsToken(req);
 
             if (token) {
                 oAuth2Client.setCredentials(token);

@@ -2,7 +2,6 @@ const {google} = require('googleapis');
 const fs = require('fs');
 
 const SCOPES = ['https://www.googleapis.com/auth/drive'];
-const TOKEN_PATH = 'token.json';
 
 async function authorize() {
     let promise = new Promise((resolve, reject) => {
@@ -18,16 +17,18 @@ async function authorize() {
     return new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
 }
 
-async function existsToken() {
-    let promise = new Promise((resolve, reject) => {
-        // Check if we have previously stored a token.
-        fs.readFile(TOKEN_PATH, (err, token) => {
-            if (err) return resolve(false);
-            if (token) return resolve(JSON.parse(token));
-        });
-    });
+async function existsToken(req) {
+    let promise = new Promise((resolve) => {
+        const token = req.session.token;
 
+        // Check if we have previously stored a token.
+        if (token !== undefined) {
+            resolve(token);
+        } else {
+            resolve(false);
+        }
+    });
     return await promise;
 }
 
-module.exports = {fs, authorize, existsToken, SCOPES, TOKEN_PATH};
+module.exports = {fs, authorize, existsToken, SCOPES};

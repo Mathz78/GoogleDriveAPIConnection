@@ -1,5 +1,6 @@
-const express = require("express");
 const fileUpload = require('express-fileupload');
+const session = require("express-session");
+const express = require("express");
 const app = express();
 const port = 8000;
 
@@ -11,6 +12,18 @@ app.use(fileUpload({
     useTempFiles : true,
     tempFileDir : __dirname + '/temp'
 }));
+
+app.use(
+    session({
+        secret: "&$QUwThvBDp*O7J5f9PnA#yM",
+        cookie: {
+            // After 72 hours the token will expire and the user will be required to log in
+            maxAge: 259200000
+        },
+        resave: false,
+        saveUninitialized: false
+    })
+);
 
 app.use("/", require("./routes/root"));
 app.use("/home", require("./routes/home"));

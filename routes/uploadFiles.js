@@ -8,7 +8,7 @@ router
     .route("/")
     .get((req, res) => {
         (async () => {
-            const token = await imports.existsToken();
+            const token = await imports.existsToken(req);
 
             if (token) {
                 res.render('uploadFiles');
@@ -20,7 +20,7 @@ router
     .post((req, res) => {
         (async () => {
             const oAuth2Client = await imports.authorize();
-            const token = await imports.existsToken();
+            const token = await imports.existsToken(req);
             oAuth2Client.setCredentials(token);
 
             const file = req.files.file;
