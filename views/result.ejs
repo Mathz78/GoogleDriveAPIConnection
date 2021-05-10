@@ -20,7 +20,8 @@
             <div class="card-body">
                 <h1 class="card-title text-center text-secondary">That's a list of your files</h1>
                 <h3 class="text-secondary text-center mb-5">Up to 1000 files</h3>
-
+                
+                <p class="warning">* Click on the item to be redirected to the file.</p>
                 <div class="list-group">
                     <% for(var i = 0; i < files.length; i++) {%>
                         <a href="<%= files[i].webViewLink %>" class="list-group-item list-group-item-action" aria-current="true">

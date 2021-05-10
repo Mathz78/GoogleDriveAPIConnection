@@ -1,3 +1,9 @@
 .list-group-item:hover {
     background-color: #caf7e3;
 }
+
+.warning {
+    font-size: 14px;
+    color: #45526c;
+    margin: 0;
+}
