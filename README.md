@@ -7,7 +7,7 @@ First you need to create a Google Project and get your credentials to use Google
 
 To create a Project, Credentials and a OAuth Consent Screen you need to go to <a href="https://console.cloud.google.com/home/">Google Console</a>.
 
-For further information to can read the official documentation <a href="https://developers.google.com/workspace/guides/create-project">Click here.</a>
+For further information you can read the official documentation <a href="https://developers.google.com/workspace/guides/create-project">Click here.</a>
 
 # Installation
 
