@@ -45,7 +45,7 @@ router
 
                     // Format the date
                     for (let i = 0; i < files.length;i++) {
-                        files[i].createdTime = files[i].createdTime.replace(/T/, ' ').replace(/\..+/, '')
+                        files[i].createdTime = files[i].createdTime.replace(/T/, ' ').replace(/\..+/, '');
                     }
                     returnView(files);
                 });
